@@ -14,6 +14,7 @@ namespace Identity
             builder.Services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+            // Identity API needs to know which class to use for Users and also which class to use for Roles, not to mention which ORM(entity framework), db context, and lastly the token providers for when we want to change passwords, email and phone numbers.. even two factor authentication if there's a need
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
