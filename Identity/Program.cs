@@ -1,4 +1,5 @@
 using Identity.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Identity
@@ -13,6 +14,9 @@ namespace Identity
             builder.Services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddControllersWithViews();
 
